@@ -8,7 +8,8 @@ https://docs.docker.com/engine/install/
 
 With this step done, you can clone the project.
 ```bash
-$ git clone https://github.com/wladimirgrf/02-devops-containers-challenge.git && cd 02-devops-containers-challenge
+$ git clone https://github.com/wladimirgrf/02-devops-containers-challenge.git 
+$ cd 02-devops-containers-challenge
 ```
 
 And set up the environment variables.
