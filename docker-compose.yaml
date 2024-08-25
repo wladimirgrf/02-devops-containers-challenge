@@ -1,0 +1,34 @@
+services:
+  challange-db:
+    image: postgres:16.2-alpine3.19
+    container_name: challange-db
+    volumes:
+      - db:/var/lib/postgres
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    networks:
+      - challange-network
+
+  challange-api:
+    build:
+      context: .
+    container_name: challange-api
+    ports:
+      - 3001:3000
+    depends_on:
+      - challange-db
+    networks:
+      - challange-network
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@challange-db:5432/${DB_NAME}?pool_timeout=0
+
+networks:
+  challange-network:
+    driver: bridge
+
+volumes:
+  db:
